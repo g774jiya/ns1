@@ -38,3 +38,7 @@ print("Encrypted message:", ciphertext)
 # Decrypt the ciphertext using the private key (d, n)
 decrypted_message = decrypt(ciphertext, d, n)
 print("Decrypted message:", decrypted_message)
+
+# Use Input 17 , 19 as prime number
+# Use Enter a message to encrypt (as an integer): 23 or 24 or 78
+# Output will show same values for Encrypted message and Decrypted Message
