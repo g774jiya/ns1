@@ -21,3 +21,11 @@ shared_key_b = pow(a_public, b_private, p)  # (A_public ^ b_private) mod p
 # Both should have the same shared key
 print("Shared Key (Alice):", shared_key_a)
 print("Shared Key (Bob):", shared_key_b)
+
+# Choose A prime Number p = 17
+# Choose Enter A number such that 1<g<p = 16
+# Output will be:
+# Secret Key Of A:  1
+# Secret Key Of B:  1
+
+# The secret Key values should be same
