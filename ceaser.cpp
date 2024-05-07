@@ -27,11 +27,11 @@ string caesar_decrypt(string text, int shift)
     {
         if (isupper(text[i]))
         {
-            result += char((text[i] - shift - 65 + 26) % 26 + 65);
+            result += char(int(text[i] - shift - 65 + 26) % 26 + 65);
         }
         else
         {
-            result += char((text[i] - shift - 97 + 26) % 26 + 97);
+            result += char(int(text[i] - shift - 97 + 26) % 26 + 97);
         }
       
     }
