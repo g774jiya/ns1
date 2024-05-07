@@ -2,42 +2,43 @@
 #include <string>
 using namespace std;
 
-string generateKey(string str, string key) {
-    int keyLength = key.length();
-    for (int i = 0; key.length() < str.length(); i++) {
-        key += key[i % keyLength];
-    }
-    return key;
-}
-
-string vigenereCipher(string text, string key, bool encrypt) {
-    string result = "";
-    int shift = (encrypt) ? 1 : -1;
-    for (int i = 0; i < text.length(); i++) {
-        char currentChar = text[i];
-        if (isalpha(currentChar)) {
-            char base = isupper(currentChar) ? 'A' : 'a';
-            char offset = key[i] - 'A';
-            char transformedChar = (currentChar - base + shift * offset + 26) % 26 + base;
-            result += transformedChar;
+string vigenere_encrypt(string plain_text, string key) {
+    string cipher_text = "";
+    int key_index = 0;
+    for (char& c : plain_text) {
+        if (isalpha(c)) {
+            int shift = tolower(key[key_index % key.length()]) - 'a';
+            cipher_text += (tolower(c) - 'a' + shift) % 26 + 'a';
+            key_index++;
         } else {
-            result += currentChar;
+            cipher_text += c;
         }
     }
-    return result;
+    return cipher_text;
+}
+
+string vigenere_decrypt(string cipher_text, string key) {
+    string plain_text = "";
+    int key_index = 0;
+    for (char& c : cipher_text) {
+        if (isalpha(c)) {
+            int shift = tolower(key[key_index % key.length()]) - 'a';
+            plain_text += (tolower(c) - 'a' - shift + 26) % 26 + 'a';
+            key_index++;
+        } else {
+            plain_text += c;
+        }
+    }
+    return plain_text;
 }
 
 int main() {
-    string plaintext = "ATTACKTHESYSTEM";
-    string keyword = "KEY";
-    string key = generateKey(plaintext, keyword);
-
-    string encryptedText = vigenereCipher(plaintext, key, true);
-    string decryptedText = vigenereCipher(encryptedText, key, false);
-
-    cout << "Original: " << plaintext << endl;
-    cout << "Encrypted: " << encryptedText << endl;
-    cout << "Decrypted: " << decryptedText << endl;
-
+    string text = "Hello, world!";
+    string key = "key";
+    string encrypted_text = vigenere_encrypt(text, key);
+    cout<<text;
+    cout << "\nEncrypted: " << encrypted_text << endl;
+    string decrypted_text = vigenere_decrypt(encrypted_text, key);
+    cout << "\nDecrypted: " << decrypted_text << endl;
     return 0;
 }
